@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="jquery-ui.js"></script>
+  <script type="text/javascript">
+  
+  $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 500,
+      values: [ 100, 300 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+		$( "#amount1" ).val(ui.values[ 0 ]);
+		$( "#amount2" ).val(ui.values[ 1 ]);
+      }
+    });
+    $( "#amount" ).html( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+     " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+  });
+  </script>
+</head>
+
+<body>
+
+  <p>
+    Price Range:<p id="amount"></p>
+  </p>
+
+  <div id="slider-range"></div>
+
+  <form method="post" action="get_items.php">
+    <input type="hidden" id="amount1">
+    <input type="hidden" id="amount2">
+    <input type="submit" name="submit_range" value="Submit">
+  </form>
+
+</body>
+</html>
